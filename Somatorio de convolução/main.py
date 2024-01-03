@@ -31,7 +31,8 @@ def first_signal():
         if operation == "sim":
             parameter = int(input("Insira o parametro da operação: "))
             new_signal = signal.time_shifting(parameter)
-            formulas.append(new_signal)
+            new_signal_values = signal.get_values(new_signal)
+            formulas.append(new_signal_values)
             signal.plot('first_signal.png', 'First Signal')
             signal.plot('shifted_first_signal.png', 'Shifted First Signal', new_signal)
             break
@@ -72,7 +73,8 @@ def second_signal():
         if operation == "sim":
             parameter = int(input("Insira o parametro da operação: "))
             new_signal = signal.time_shifting(parameter)
-            formulas.append(new_signal)
+            new_signal_values = signal.get_values(new_signal)
+            formulas.append(new_signal_values)
             signal.plot('second_signal.png', 'Second Signal')
             signal.plot('shifted_second_signal.png', 'Shifted Second Signal', new_signal)
             break
