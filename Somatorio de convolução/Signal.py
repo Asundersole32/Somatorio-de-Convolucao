@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 class Signal:
     def __init__(self, function_interval):
+        self.start = 0
         self.t = sp.symbols('t')
         self.expressions = []
 
@@ -13,6 +14,8 @@ class Signal:
                 self.expressions.append([0, True])
             else:
                 start, end = function[1]
+                if start <= self.start:
+                    self.start = start
                 expressions = function[0].simplify()
                 self.expressions.append((expressions, (self.t >= start) & (self.t < end)))
 
@@ -22,6 +25,12 @@ class Signal:
     def time_shifting(self, shift_amount):
         shifted_signal = self.formula.subs(self.t, self.t - shift_amount)
         return shifted_signal
+
+    def get_start(self, parameter=None):
+        if parameter is None:
+            return self.start
+        else:
+            return self.start+parameter
 
     def get_values(self, signal=None):
         t_values = np.linspace(-20, 20, 40)
